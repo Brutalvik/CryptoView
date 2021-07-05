@@ -1,11 +1,15 @@
 import './App.css';
-import Registration from './components/registration/Registration';
+import Register from './components/registration/Register';
+import Navbar from './components/nav/Navbar'
+
+
 
 function App() {
   return (
     <div className="App">
+      <Navbar/>
       <header className="App-header">
-          <Registration />
+        <Register />
       </header>
     </div>
   );

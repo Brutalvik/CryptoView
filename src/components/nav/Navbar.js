@@ -1,29 +1,32 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './Navbar.css'
 
-import styled from 'styled-components';
+const navItems = ['Register','Login', 'Dashboard', 'About']
 
-const Nav = styled.nav `
-  width: 100%;
-  height: 65px;
-  border-bottom: 2px solid aliceblue;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-`
+class Navbar extends Component {
+  
+  state = {clicked: false}
 
-const navItems = ['Register','Login', 'Home', 'Dashboard', 'About']
+  handleClick = () => {
+    this.setState({ clicked: !this.state.clicked})
+    //console.log(this.state.clicked);
+  }
 
-function Hamburger() {
-  return (
-    <Nav>
-      <div className="logo">
+  render() {
+    return (
+      <div className="nav">
+        <div className="hamburger"
+            onClick={this.handleClick}>
+            <div className={this.state.clicked ? "line1" : "line"}></div>
+            <div className={this.state.clicked ? "line2" : "line"}></div>
+            <div className={this.state.clicked ? "line3" : "line"}></div>
+        </div>
+        <ul className={this.state.clicked ? 'nav-open' : 'nav-close'}>
+        {navItems.map(item => (<li className="list">{item}</li>))}
+        </ul>
       </div>
-      <ul>
-        {navItems.map(item => (<li>{item}</li>))}
-      </ul>
-    </Nav>
-  )
+    )
+  }
 }
 
-export default Hamburger
+export default Navbar

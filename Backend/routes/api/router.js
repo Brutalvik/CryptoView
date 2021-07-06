@@ -16,10 +16,10 @@ router.get('/', (req, res) => {
 //Get Single User based on ID
 router.get('/:userID', (req, res) => {
     db.query(`SELECT * FROM users WHERE userID=${req.params.userID}`,
-    (err, user) => {
+    (err, users) => {
         if (err) throw err;
-        const found = user.some(user => user.userID === parseInt(req.params.userID))
-        found ? res.json(user) : res.status(400).json(`User with ID ${req.params.userID} not found !`)
+        const found = users.some(user => user.userID === parseInt(req.params.userID))
+        found ? res.json(users) : res.status(400).json(`User with ID ${req.params.userID} not found !`)
     }
     )
    })
@@ -51,6 +51,17 @@ router.post('/register', (req, res) => {
                     res.json('User Registered Successfully')
                 })
     })
+})
+
+
+//Delete User
+
+router.delete('/delete/:userID', (req, res) => {
+    db.query(`DELETE FROM users WHERE userID=${req.params.userID}`, (err, users) => {
+        if (err) throw err;
+        res.json('User Deleted Successfully');
+    }
+    )
 })
 
 module.exports = router;

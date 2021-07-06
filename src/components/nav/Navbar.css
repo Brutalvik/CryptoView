@@ -1,10 +1,4 @@
-.nav {
-    height: 10vh;
-
-}
-
 .nav-close {
-    padding-top: 20%;
     display: flex;
     width: 100%;
     height: 100%;
@@ -12,14 +6,14 @@
     position: absolute;
     flex-direction: column;
     background-color: black;
-    clip-path: circle(0px at 8% 6%);
-    -webkit-clip-path: circle(0px at 8% 6%);
+    clip-path: circle(0px at 4% 10%);
+    -webkit-clip-path: circle(0px at 4% 10%);
     transition: all 0.5s ease-in;
     pointer-events: all;
 }
+
 .nav-open {
-    position: absolute;
-    padding-top: 15%;
+    padding-top: 10%;
     display: flex;
     width: 100%;
     height: 100%;
@@ -27,8 +21,8 @@
     position: absolute;
     flex-direction: column;
     background-color: black;
-    clip-path: circle(300px at 10% 20%);
-    -webkit-clip-path: circle(300px at 10% 20%);
+    clip-path: circle(400px at 5% 10%);
+    -webkit-clip-path: circle(400px at 5% 10%);
     transition: 0.5s ease-out;
     pointer-events: all;
 }
@@ -39,14 +33,14 @@
     text-decoration: none;
     font-size: 20px;
     cursor: pointer;
-    padding: 20px;
-    padding-left: 1%;
+    padding-bottom: 20px;
     transition: 0.3s ease-out;
 }
 
 .list:hover {
     font-size: 30px;
     font-weight: bold;
+    color: aliceblue;
     transition: 0.3s ease-in-out;
 }
 

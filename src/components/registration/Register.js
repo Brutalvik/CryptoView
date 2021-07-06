@@ -6,6 +6,7 @@ function Register() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [disable, setDisable] = useState(false);
 
     const newUser = {
         name: name,
@@ -18,6 +19,8 @@ function Register() {
         axios.post('http://localhost:5000/users/register', newUser)
         .then(() => console.log('Data Sent to Backend'))
         .catch(err => console.error(err))
+
+        setDisable(true);
     }
   return (
       <div>
@@ -43,7 +46,8 @@ function Register() {
                 value={password}
                 onChange={e => setPassword(e.target.value)} />
             </div>
-            <button className="btn btn-primary">Register</button>
+            <button className="btn btn-primary"
+            disabled={disable}>Register</button>
         </form>
         </div>
   )

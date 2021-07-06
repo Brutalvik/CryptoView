@@ -24,6 +24,29 @@ router.get('/:userID', (req, res) => {
     )
    })
 
+//Login User
+router.post('/login', async(req, res) => {
+    const loginUser = {
+        email: req.body.email,
+        password: req.body.password
+    }
+    
+
+    db.query(`SELECT * FROM users WHERE email='${loginUser.email}'`, (err, users) => {
+        if (err) throw err;
+        let encrpyted = "";
+        const found = users.some(user => user.email === loginUser.email)
+        users.find(user => encrpyted = user.password)
+        found ?
+        bcrypt.compare(loginUser.password, encrpyted, (err, result) => {
+            if (err) throw err;
+            result ? res.json('Login Success') : res.status(400).json('Bad Password')
+
+        })
+        : res.status(400).json('No User Found')
+    })
+    
+})
 
 //Add User
 router.post('/register', (req, res) => {

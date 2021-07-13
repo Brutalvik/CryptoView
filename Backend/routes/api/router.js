@@ -1,54 +1,14 @@
+require('dotenv').config()
 const express = require('express')
 const router = express.Router();
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken')
 const db = require('../DB')
 
+let globalEncrypted = "";
 
-router.get('/', (req, res) => {
- db.query('SELECT * FROM users',
-  (err, users) => {
-      if (err) throw err;
-      res.json(users)
-  })
-})
 
-//Get Single User based on ID
-router.get('/:userID', (req, res) => {
-    db.query(`SELECT * FROM users WHERE userID=${req.params.userID}`,
-    (err, users) => {
-        if (err) throw err;
-        const found = users.some(user => user.userID === parseInt(req.params.userID))
-        found ? res.json(users) : res.status(400).json(`User with ID ${req.params.userID} not found !`)
-    }
-    )
-   })
-
-//Login User
-router.post('/login', async(req, res) => {
-    const loginUser = {
-        email: req.body.email,
-        password: req.body.password
-    }
-    
-
-    db.query(`SELECT * FROM users WHERE email='${loginUser.email}'`, (err, users) => {
-        if (err) throw err;
-        let encrpyted = "";
-        const found = users.some(user => user.email === loginUser.email)
-        users.find(user => encrpyted = user.password)
-        found ?
-        bcrypt.compare(loginUser.password, encrpyted, (err, result) => {
-            if (err) throw err;
-            result ? res.json('Login Success') : res.status(400).json('Bad Password')
-
-        })
-        : res.status(400).json('No User Found')
-    })
-    
-})
-
-//Add User
+//Register User
 router.post('/register', (req, res) => {
     bcrypt.hash(req.body.password, 10, (err, hash) => 
     {
@@ -60,8 +20,6 @@ router.post('/register', (req, res) => {
             status: 1
         }
     
-       
-    
         if(!newUser.name || !newUser.email || !newUser.password)
         {
             return res.status(400).json('Please enter all Information!')
@@ -72,19 +30,89 @@ router.post('/register', (req, res) => {
                 (err) => {
                     if (err) throw err;
                     res.json('User Registered Successfully')
-                })
+        })
     })
 })
 
-
-//Delete User
-
-router.delete('/delete/:userID', (req, res) => {
-    db.query(`DELETE FROM users WHERE userID=${req.params.userID}`, (err, users) => {
-        if (err) throw err;
-        res.json('User Deleted Successfully');
+//Login User
+router.post('/login', async(req, res) => {
+    const loginUser = {
+        email: req.body.email,
+        password: req.body.password
     }
-    )
+    db.query(`SELECT * FROM users WHERE email='${loginUser.email}'`, (err, users) => {
+        if (err) throw err;
+        let encrypted = "";
+        const found = users.some(user => user.email === loginUser.email)
+        users.find(user => encrypted = user.password)
+        globalEncrypted = encrypted;
+        found ?
+        bcrypt.compare(loginUser.password, encrypted, (err, result) => {
+            if (err) throw err;
+            result ? 
+            jwt.sign({loginUser}, encrypted, {expiresIn: '1000000s'}, (err, token) => {
+                if (err) throw err
+                res.json(token);
+            })
+            : res.status(400).json('Bad Password')
+
+        })
+        : res.status(400).json('No User Found')
+    })  
 })
+
+
+//Dashboard
+
+router.get('/dashboard/:id', authenticateToken,  (req, res) => {
+    
+jwt.verify(req.token, globalEncrypted, (err, authData) => {
+    if (err)
+    {
+        res.sendStatus(403)
+    }
+    else
+    {
+        const email = authData.loginUser.email
+        db.query(`SELECT * FROM users WHERE email='${email}'`, (err, users) => {
+            if (err) throw err;
+            const found = users.some(user => user.email === email)
+            var selectedUser = users.find(user => selectedUser = user)
+            found ?
+            res.json(`Welcome ${selectedUser.name}`)
+            : res.json({Msg: 'Welcome Guest'})
+        }) 
+    }
+})
+    
+})
+
+
+//Middleware Authentication
+function authenticateToken (req, res, next) {
+    const bearerHeader = req.headers['authorization']
+    if (typeof bearerHeader !== 'undefined') {
+        const bearer = bearerHeader.split(' ')
+        const token = bearer[1]
+        req.token = token
+        next();
+    }
+    else {
+       res.sendStatus(403)
+    }   
+}
+
+
+// //Delete User
+
+// router.delete('/delete/:userID', (req, res) => {
+
+//     const userID = req.body.userID
+
+//     db.query(`DELETE FROM users WHERE userID='${userID}'`, (err, users) => {
+//         if (err) throw err;
+//         res.json({msg: 'user deleted'})
+//     })
+// })
 
 module.exports = router;

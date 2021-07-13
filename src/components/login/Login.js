@@ -1,22 +1,28 @@
 import React, {useState} from 'react'
 import axios from 'axios';
+import Dashboard from '../Dashboard/Dashboard';
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [disable, setDisable] = useState(false);
-
+    const [name, setName] = useState("");
     const loginUser = {
         email: email,
         password: password
     }
 
-    const doLogin = (e) => {
-        e.preventDefault();
-        axios.post('http://localhost:5000/users/login', loginUser)
-        .then(() => console.log('Data Sent to Backend'))
-        .catch(err => console.error(err))
-    }
+    const doLogin = async(e) => {
+            e.preventDefault();
+            axios.post('/users/login', loginUser)
+            .then(res => 
+                {
+                    if(res.status === 200) {
+                    axios.get(`/users/dashboard/${loginUser.email}`, { headers: {"Authorization" : `Bearer ${res.data}`} })
+                    .then(res => {setName(res.data)})
+                }
+            })
+            .catch(err => console.error(err))
+        }
 
   return (
     <div>
@@ -35,8 +41,7 @@ function Login() {
                 value={password}
                 onChange={e => setPassword(e.target.value)} />
             </div>
-            <button className="btn btn-primary"
-            disabled={disable}>Login</button>
+            <button className="btn btn-primary">Login</button>
         </form>
     </div>
   )

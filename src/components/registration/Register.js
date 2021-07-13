@@ -16,7 +16,7 @@ function Register() {
 
     const sendData = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/users/register', newUser)
+        axios.post('/users/register', newUser)
         .then(() => console.log('Data Sent to Backend'))
         .catch(err => console.error(err))
 

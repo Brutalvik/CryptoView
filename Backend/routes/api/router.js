@@ -17,7 +17,7 @@ router.post('/register', (req, res) => {
             name: req.body.name,
             email: req.body.email,
             password: hash,
-            status: 1
+            active: 1
         }
     
         if(!newUser.name || !newUser.email || !newUser.password)
@@ -25,8 +25,8 @@ router.post('/register', (req, res) => {
             return res.status(400).json('Please enter all Information!')
         }
     
-        db.query(`INSERT INTO users (name, email, password, status) 
-        VALUES ('${newUser.name}', '${newUser.email}', '${newUser.password}', ${newUser.status})`, 
+        db.query(`INSERT INTO users (name, email, password, active) 
+        VALUES ('${newUser.name}', '${newUser.email}', '${newUser.password}', ${newUser.active})`, 
                 (err) => {
                     if (err) throw err;
                     res.json('User Registered Successfully')

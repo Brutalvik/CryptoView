@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
+// import { useHistory } from "react-router-dom";
 import axios from 'axios';
-import Dashboard from '../Dashboard/Dashboard';
+// import Dashboard from '../Dashboard/Dashboard';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -11,14 +12,16 @@ function Login() {
         password: password
     }
 
+    // const history = useHistory();
     const doLogin = async(e) => {
             e.preventDefault();
             axios.post('/users/login', loginUser)
             .then(res => 
                 {
                     if(res.status === 200) {
-                    axios.get(`/users/dashboard/${loginUser.email}`, { headers: {"Authorization" : `Bearer ${res.data}`} })
+                        axios.get(`/users/dashboard/${loginUser.email}`, { headers: {"Authorization" : `Bearer ${res.data}`} })
                     .then(res => {setName(res.data)})
+                    // history.push(`/dashboard/${loginUser.email}`)
                 }
             })
             .catch(err => console.error(err))
@@ -42,6 +45,9 @@ function Login() {
                 onChange={e => setPassword(e.target.value)} />
             </div>
             <button className="btn btn-primary">Login</button>
+            <div>
+                <h2>{name.toUpperCase()}</h2>
+            </div>
         </form>
     </div>
   )

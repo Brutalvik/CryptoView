@@ -7,6 +7,7 @@ function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [disable, setDisable] = useState(false);
+    const [message, setMessage] = useState("");
 
     const newUser = {
         name: name,
@@ -17,10 +18,16 @@ function Register() {
     const sendData = (e) => {
         e.preventDefault();
         axios.post('/users/register', newUser)
-        .then(() => console.log('Data Sent to Backend'))
+        .then(response => {
+            if (response.status===200){
+                setMessage(response.data)
+                setDisable(true);
+            }
+            else{
+                setMessage("Registration Failed")
+            }
+        })
         .catch(err => console.error(err))
-
-        setDisable(true);
     }
   return (
       <div>
@@ -46,8 +53,10 @@ function Register() {
                 value={password}
                 onChange={e => setPassword(e.target.value)} />
             </div>
-            <button className="btn btn-primary"
+            <button className="btn-register"
             disabled={disable}>Register</button>
+            <br/>
+            <h5>{message}</h5>
         </form>
         </div>
   )

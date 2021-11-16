@@ -10,6 +10,11 @@ let globalEncrypted = "";
 
 //Register User
 router.post('/register', (req, res) => {
+
+    if(req.body.password === "") {
+        return res.status(400).json("Error: Password must be provided")
+    }
+
     bcrypt.hash(req.body.password, 10, (err, hash) => 
     {
         if (err) throw err;
@@ -22,7 +27,7 @@ router.post('/register', (req, res) => {
     
         if(!newUser.name || !newUser.email || !newUser.password)
         {
-            return res.status(400).json('Please enter all Information!')
+            return res.status(400).json("Attention: Please enter all Information!")
         }
     
         db.query(`INSERT INTO users (name, email, password, active) 

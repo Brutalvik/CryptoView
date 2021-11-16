@@ -10,6 +10,7 @@
     -webkit-clip-path: circle(0px at 4% 10%);
     transition: all 0.5s ease-in;
     pointer-events: all;
+    z-index: 2;
 }
 
 .nav-open {
@@ -25,6 +26,7 @@
     -webkit-clip-path: circle(400px at 5% 10%);
     transition: 0.5s ease-out;
     pointer-events: all;
+    z-index: 2;
 }
 
 .list {
@@ -49,7 +51,7 @@
     cursor: pointer;
     margin-left: 20px;
     margin-top: 20px;
-    z-index: 2;
+    z-index: 9;
 }
 
 .line {

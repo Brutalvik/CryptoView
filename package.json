@@ -9,9 +9,13 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
-    "bootstrap": "^5.0.2",
+    "bootstrap": "^5.1.3",
+    "chart.js": "^3.6.0",
+    "chartjs-plugin-datalabels": "^2.0.0-rc.1",
     "jsonwebtoken": "^8.5.1",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.0.2",
+    "react-chartjs-2": "^3.3.0",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -19,8 +23,9 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env react-scripts start",
+    "build:staging": "env-cmd -f .env react-scripts build",
+    "build:production": "env-cmd -f .env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

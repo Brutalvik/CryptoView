@@ -1,0 +1,80 @@
+.dashboard-header {
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.dashboard {
+    width: 100%;
+    height: 100vh;
+    margin-left: 100px;
+}
+
+button {
+    background-color: lightblue;
+    height: 50px;
+    width: 100px;
+    border-radius: 30px !important;
+    text-align: center !important;
+    font-size: 25px !important;
+}
+
+.logout {
+    display: inline-block;
+    padding-left: 1000px !important;
+}
+
+table{
+    margin-left: 60%;
+    margin-top: 5%;   
+}
+
+td {
+    border: solid 1px white !important;
+    text-align: left;
+    width: 200px;
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+h1 {
+    margin-bottom: 20%;
+    display: inline;
+    padding-left: 20px;
+    float: center;
+}
+
+h2 {
+    display: inline;
+    float: left;
+}
+
+.table-header {
+    width: 30%;
+    margin-left: 60%;
+}
+
+.bar {
+    width: 24%;
+    height: 10px;
+    float: right;
+    margin-right: 16%;
+}
+
+p, i {
+    font-size: 15px !important;
+    display: inline
+}
+
+.p_left {
+    float: left
+}
+
+.p_right {
+    float: right;
+}
+
+.progress {
+    width: 100%;
+    height: inherit !important;
+}

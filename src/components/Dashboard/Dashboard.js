@@ -47,13 +47,12 @@ function Dashboard(props) {
     let lowday = 0;
     let percent = 0;
     Object.keys(data).map(crypto => (
-      highday = data[crypto].HIGHDAY.split(' '),
-      lowday = data[crypto].LOWDAY.split(' '),
-      highday = parseInt(highday[1]),
-      lowday = parseInt(lowday[1]),
+      highday = data[crypto].HIGHDAY,
+      lowday = data[crypto].LOWDAY,
       percent = (lowday-highday)/lowday,
-      percent = percent * -100,
-      setBar(percent)
+      percent = percent * -1000,
+      setBar(percent),
+      console.log(bar)
     ))
   })
   
@@ -62,7 +61,7 @@ function Dashboard(props) {
     fetch(url)
     .then(response => response.json())
     .then(res => {
-      setCryptodata(res.DISPLAY)
+      setCryptodata(res.RAW)
     })
   }, [url])
 
@@ -81,7 +80,8 @@ function Dashboard(props) {
         <div className="logout">
           <button onClick={logout}>Logout</button>
         </div>
-
+        <div className="chart">
+        </div>
         <div>
             {
               Object.keys(data).map(crypto => (

@@ -24,7 +24,7 @@ button {
 }
 
 table{
-    margin-left: 60%;
+    margin-left: 65%;
     margin-top: 5%;   
 }
 
@@ -51,14 +51,15 @@ h2 {
 
 .table-header {
     width: 30%;
-    margin-left: 60%;
+    margin-left: 65%;
+    margin-top: -5%;
 }
 
 .bar {
-    width: 24%;
+    width: 23%;
     height: 10px;
     float: right;
-    margin-right: 16%;
+    margin-right: 12%;
 }
 
 p, i {

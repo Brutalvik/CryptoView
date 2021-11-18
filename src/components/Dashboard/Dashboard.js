@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { useHistory } from "react-router-dom";
-import Crypto from './Crypto'
-import Currency from './Currency'
+import Crypto from '../crypto/Crypto'
+import Currency from '../currency/Currency'
 import './Dashboard.css'
-import News from './News'
+import News from '../news/News'
 
 import ProgressBar from 'react-bootstrap/ProgressBar'
+import Logout from './Logout';
 
 function Dashboard(props) {
 
@@ -19,14 +20,20 @@ function Dashboard(props) {
     crypto: null,
   })
   const [bar, setBar] = useState(0)
+  const [modalShow, setModalShow] = useState(false)
 
   var styles = {
     red: { color: "red"},
     green: {color: "green"}
   }
 
+  const showModal = () => {
+    setModalShow(true)
+  }
+
   const logout = () => {
-    history.push(`/login`)
+    history.push('/login')
+    setModalShow(false)
   }
 
   const getCrypto = (crypto) => {
@@ -78,7 +85,7 @@ function Dashboard(props) {
           <button type="button" onClick={displayData}>Show</button>
         </div>
         <div className="logout">
-          <button onClick={logout}>Logout</button>
+          <button onClick={showModal}>Logout</button>
         </div>
         <div className="chart">
         </div>
@@ -127,6 +134,11 @@ function Dashboard(props) {
               </div>
               ))
               }  
+        </div>
+        <div>
+         <Logout show={modalShow} 
+                logout={logout} 
+                onHide={() => setModalShow(false)}/>
         </div>
       </div>
   )

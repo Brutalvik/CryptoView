@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Navbar from './components/nav/Navbar'
 import Register from './components/registration/Register';
 import Login from './components/login/Login'
-import Dashboard from './components/Dashboard/Dashboard';
+import Dashboard from './components/dashboard/Dashboard'
 
 function App(props) {
   return (

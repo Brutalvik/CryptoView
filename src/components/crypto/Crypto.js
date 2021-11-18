@@ -7,8 +7,6 @@ function Crypto(props) {
     const url = `https://min-api.cryptocompare.com/data/blockchain/list?api_key=${apiKey}`;
     
     const [ticker, setTicker] = useState([]);
-    // const [crypto, setCrypto] = useState("");
-    
 
     useEffect (() => {
       fetch(url)

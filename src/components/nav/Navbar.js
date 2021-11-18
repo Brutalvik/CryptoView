@@ -25,7 +25,7 @@ class Navbar extends Component {
             <ul className={this.state.clicked ? 'nav-open' : 'nav-close'}>
               <Link className="list" to="/register"><li>Register</li></Link>
               <Link className="list" to="/login"><li>Login</li></Link>
-              <Link className="list" to="/dashboard"><li>Dashboard</li></Link>
+              {/* <Link className="list" to="/dashboard"><li>Dashboard</li></Link> */}
               <Link className="list" to="/#"><li>About</li></Link>
             </ul>
         </div>

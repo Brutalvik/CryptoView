@@ -1,0 +1,9 @@
+p {
+    margin-left: 20px;
+    text-decoration: none !important;
+}
+
+p:hover {
+    color: white;
+    text-decoration: none !important;
+}

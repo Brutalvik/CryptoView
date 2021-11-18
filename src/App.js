@@ -5,7 +5,7 @@ import Register from './components/registration/Register';
 import Login from './components/login/Login'
 import Dashboard from './components/Dashboard/Dashboard';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <Router>

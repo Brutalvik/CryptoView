@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
-import Dashboard from '../Dashboard/Dashboard';
+import {Link} from 'react-router-dom'
+import './Login.css'
+import '../registration/Register.css'
 
 function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
     const loginUser = {
         email: email,
         password: password
@@ -15,15 +18,27 @@ function Login(props) {
     const history = useHistory();
 
     const doLogin = async(e) => {
+            if (!loginUser.email || !loginUser.password)
+            {
+                setMessage("Username/Password cannot be blank")
+            }
+
             e.preventDefault();
             axios.post('/users/login', loginUser)
             .then(res => 
                 {
-                    if(res.status === 200) {
-                        axios.get(`/users/dashboard/${loginUser.email}`, { headers: {"Authorization" : `Bearer ${res.data}`} })
-                    .then(res => <Dashboard getGreet={res.data}/>)
-                    history.push(`/dashboard`)
-                }
+                    
+                    axios.get(`/users/dashboard/${loginUser.email}`, { headers: {"Authorization" : `Bearer ${res.data}`} })
+                    .then(res => {
+                        if (res.status === 200)
+                        {
+                            history.push(`/dashboard`)
+                        }
+                        else {
+                            setMessage("Username/Password Error")
+                        }
+                    } )
+                    
             })
             .catch(err => console.error(err))
         }
@@ -47,8 +62,14 @@ function Login(props) {
                 value={password}
                 onChange={e => setPassword(e.target.value)} />
             </div>
-            <button className="btn btn-primary">Login</button>
+            <button className="btn-register">Login</button>
         </form>
+        <div>
+            <p>{message}</p>
+        </div>
+        <div>
+            <p>New User?</p><Link className="list" to="/register"><p>Register Here</p></Link>
+        </div>
     </div>
   )
 }

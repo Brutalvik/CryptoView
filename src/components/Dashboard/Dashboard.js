@@ -7,11 +7,13 @@ import News from '../news/News'
 
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Logout from './Logout';
+import Spinner from 'react-bootstrap/Spinner'
 
 function Dashboard(props) {
 
   const history = useHistory();
 
+  const [loading, setLoading] = useState(true);
   const [selectedCrypto, setSelectedCrypto] = useState("BTC");
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const [cryptodata, setCryptodata] = useState({})
@@ -34,6 +36,7 @@ function Dashboard(props) {
   const logout = () => {
     history.push('/login')
     setModalShow(false)
+    setLoading(true)
   }
 
   const getCrypto = (crypto) => {
@@ -70,11 +73,22 @@ function Dashboard(props) {
     .then(res => {
       setCryptodata(res.RAW)
     })
+    setLoading(false)
   }, [url])
 
-  return (
+  if(loading) {
+    return (
+      <div>
+        <Spinner animation="border"/>
+        <hr/>
+        <h4>Loading</h4>
+      </div>
+    ) 
+  }
+  else
+  {
+    return (
       <div className="dashboard">
-        {/* <h1>{console.log(props.name)}</h1> */}
         <div className="dashboard-header">
           <Crypto getCrypto={getCrypto} />
         </div>
@@ -101,7 +115,7 @@ function Dashboard(props) {
                     <h1 
                     style={data[crypto].PRICE >= data[crypto].OPENDAY ? styles.green : styles.red}
                     >{data[crypto].PRICE.toFixed(4)}</h1>
-                    <p>{crypto}</p>
+                    <p className="currency">{crypto}</p>
                   </div>
                   <div className="bar">
                   <p className="p_left">Low: {data[crypto].LOWDAY.toFixed(4)}</p>
@@ -123,11 +137,31 @@ function Dashboard(props) {
                   </tr>
                   <tr>
                     <td>Supply: </td>
-                    <td>{data[crypto].SUPPLY.toFixed(2)}</td>
+                    <td>{data[crypto].FROMSYMBOL} {data[crypto].SUPPLY.toFixed(2)}</td>
                   </tr>
                   <tr>
                     <td>Market Cap: </td>
-                    <td>{data[crypto].MKTCAP.toFixed(2)}</td>
+                    <td>{crypto} {data[crypto].MKTCAP.toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td>Change Day: </td>
+                    <td>{crypto} {data[crypto].CHANGEDAY.toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td>Change Hour: </td>
+                    <td>{crypto} {data[crypto].CHANGEHOUR.toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td>Open: </td>
+                    <td>{crypto} {data[crypto].OPENDAY.toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td>Volume: </td>
+                    <td>{data[crypto].FROMSYMBOL} {data[crypto].VOLUMEDAY.toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td>Circulating Supply: </td>
+                    <td>{crypto} {data[crypto].CIRCULATINGSUPPLYMKTCAP.toFixed(2)}</td>
                   </tr>
                 </tbody>
               </table>
@@ -141,7 +175,7 @@ function Dashboard(props) {
                 onHide={() => setModalShow(false)}/>
         </div>
       </div>
-  )
+  )}
 }
 
 export default Dashboard

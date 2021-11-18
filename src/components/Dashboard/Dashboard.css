@@ -99,3 +99,7 @@ p, i {
     height: inherit !important;
 }
 
+.currency {
+    margin-left: 20px;
+}
+

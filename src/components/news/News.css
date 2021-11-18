@@ -5,7 +5,7 @@
     background-color: rgb(28, 35, 37);
     box-shadow: 0 8px 16px 0 rgba(180, 213, 230, 0.2), 0 6px 20px 0 rgba(85, 192, 241, 0.19);
     width: 50%;
-    height: 700px;
+    height: 775px;
     overflow: auto !important;
     float: left;
 }
@@ -30,4 +30,3 @@ p {
     margin-left: 15%;
     text-align: left;
 }
-

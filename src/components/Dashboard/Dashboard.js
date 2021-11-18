@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import Crypto from './Crypto'
 import Currency from './Currency'
 import './Dashboard.css'
+import News from './News'
 
 import ProgressBar from 'react-bootstrap/ProgressBar'
 
@@ -82,6 +83,7 @@ function Dashboard(props) {
         <div className="chart">
         </div>
         <div>
+          <News/>
         </div>
         <div className="info_widget">
             {

@@ -1,0 +1,33 @@
+.news_widget {
+    margin-top: 0;
+    border: 2px solid black;
+    border-radius: 20px !important;
+    background-color: rgb(28, 35, 37);
+    box-shadow: 0 8px 16px 0 rgba(180, 213, 230, 0.2), 0 6px 20px 0 rgba(85, 192, 241, 0.19);
+    width: 50%;
+    height: 700px;
+    overflow: auto !important;
+    float: left;
+}
+
+.news_widget::-webkit-scrollbar {
+    display: none;
+}
+
+.news_icon {
+    margin-left: 40px;
+    width: 50px !important;
+    height: 50px !important;
+    float: left;
+}
+
+p { 
+    margin: 0;
+}
+
+.news {
+    width: 80%;
+    margin-left: 15%;
+    text-align: left;
+}
+

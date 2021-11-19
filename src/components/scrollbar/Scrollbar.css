@@ -1,0 +1,42 @@
+.h-scroll {
+    border: 1px solid black !important;
+    border-radius: 20px;
+    margin-top: 5%;
+    width: 50%;
+    height: 200px;
+    background-color: rgb(28, 35, 37);
+    box-shadow: 0 8px 16px 0 rgba(180, 213, 230, 0.2), 
+                0 6px 20px 0 rgba(85, 192, 241, 0.19);
+    overflow: auto !important;
+}
+
+.h-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.box {
+    width: 20%;
+    height: 120%;
+    border-radius: 20px;
+    background-color: aliceblue;
+    position: relative;
+    overflow: hidden;
+    animation: moveSlideshow 12s linear 1s infinite;
+    transition: opacity 2s ease-in-out infinite;
+    transform: translate3d(0, 0, 10);
+  }
+
+  @keyframes moveSlideshow {
+    0%    { left: 0; }
+    100%  { left: 120%; }
+  }
+
+.name_header {
+    color: black;
+    margin-top: 5%;
+    font-weight: bold;
+}
+
+h6, h5 {
+    color: black;
+}

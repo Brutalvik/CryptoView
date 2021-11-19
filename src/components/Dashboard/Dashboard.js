@@ -8,6 +8,7 @@ import News from '../news/News'
 import ProgressBar from 'react-bootstrap/ProgressBar'
 import Logout from './Logout';
 import Spinner from 'react-bootstrap/Spinner'
+import Scrollbar from '../scrollbar/Scrollbar'
 
 function Dashboard(props) {
 
@@ -89,19 +90,22 @@ function Dashboard(props) {
   {
     return (
       <div className="dashboard">
-        <div className="dashboard-header">
-          <Crypto getCrypto={getCrypto} />
+        <div className="dashboard-lock">
+          <div className="dashboard-header">
+            <Crypto getCrypto={getCrypto} />
+          </div>
+          <div className="dashboard-header">
+            <Currency getCurrency={getCurrency} />
+          </div>
+          <div className="dashboard-header">
+            <button type="button" onClick={displayData}>Show</button>
+          </div>
+          <div className="logout">
+            <button onClick={showModal}>Logout</button>
+          </div>
         </div>
-        <div className="dashboard-header">
-          <Currency getCurrency={getCurrency} />
-        </div>
-        <div className="dashboard-header">
-          <button type="button" onClick={displayData}>Show</button>
-        </div>
-        <div className="logout">
-          <button onClick={showModal}>Logout</button>
-        </div>
-        <div className="chart">
+        <div>
+          <Scrollbar />
         </div>
         <div>
           <News/>

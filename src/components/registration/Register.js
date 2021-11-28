@@ -32,7 +32,7 @@ function Register() {
         else if (!newUser.password || !confirmPassword) {
             setMessage("Password cannot be blank")
         }
-        else if (newUser.password !== !confirmPassword) {
+        else if (newUser.password !== confirmPassword) {
             setMessage("Passwords do not match")
         }
         else

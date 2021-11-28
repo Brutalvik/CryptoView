@@ -10,9 +10,6 @@
     float: left;
 }
 
-.news_widget::-webkit-scrollbar {
-    display: none;
-}
 
 .news_icon {
     margin-left: 40px;

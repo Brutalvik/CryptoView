@@ -16,12 +16,12 @@ export default function News() {
 
   return (
       <div className="news_widget">
-          {Object.keys(newsArray).map(news =>
+          {Object.keys(newsArray).map((news) =>
           <>
               <img className="news_icon" src={newsArray[news].imageurl} alt="news_image"/>
-                  <div className="news" >
+                  <div className="news">
                       <h4>{newsArray[news].title}</h4>
-                      <p>{newsArray[news].body}</p>    
+                      <p >{newsArray[news].body}</p>    
                   </div>
           </>
               )}

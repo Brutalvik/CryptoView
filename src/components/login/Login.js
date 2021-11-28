@@ -26,12 +26,15 @@ function Login(props) {
             e.preventDefault();
             axios.post('/users/login', loginUser)
             .then(res => 
+                
                 {
-                    
+                    console.log(res)
                     axios.get(`/users/dashboard/${loginUser.email}`, { headers: {"Authorization" : `Bearer ${res.data}`} })
                     .then(res => {
+                        
                         if (res.status === 200)
                         {
+                            
                             history.push(`/dashboard`)
                         }
                         else {
